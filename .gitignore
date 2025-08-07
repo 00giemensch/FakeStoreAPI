@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+
+# Xcode
+*.xcuserstate
+*.xcworkspace
+xcuserdata/
+DerivedData/
+
+# SwiftPM
+.build/
+Package.resolved
+
+# CocoaPods 
+Pods/
+
+# Carthage 
+Carthage/
+
+# Logs
+*.log
+
+# Lock files
+*.lock
+
+# Xcode previews cache
+*.preview-thumbnails
