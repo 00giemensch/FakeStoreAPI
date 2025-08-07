@@ -6,30 +6,23 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6714434E2E4519FC004E5A9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 671443452E4519FC004E5A9F /* Assets.xcassets */; };
+		671443502E4519FC004E5A9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 671443482E4519FC004E5A9F /* LaunchScreen.storyboard */; };
+		671443522E4519FC004E5A9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671443442E4519FC004E5A9F /* AppDelegate.swift */; };
+		671443532E4519FC004E5A9F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6714434B2E4519FC004E5A9F /* SceneDelegate.swift */; };
+		671443542E4519FC004E5A9F /* RegistrationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6714434C2E4519FC004E5A9F /* RegistrationVC.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		6714432C2E45174A004E5A9F /* FakeStoreAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FakeStoreAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		671443442E4519FC004E5A9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		671443452E4519FC004E5A9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		671443462E4519FC004E5A9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		671443472E4519FC004E5A9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6714434B2E4519FC004E5A9F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		6714434C2E4519FC004E5A9F /* RegistrationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		6714433E2E45174C004E5A9F /* Exceptions for "FakeStoreAPI" folder in "FakeStoreAPI" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 6714432B2E45174A004E5A9F /* FakeStoreAPI */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		6714432E2E45174A004E5A9F /* FakeStoreAPI */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				6714433E2E45174C004E5A9F /* Exceptions for "FakeStoreAPI" folder in "FakeStoreAPI" target */,
-			);
-			path = FakeStoreAPI;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		671443292E45174A004E5A9F /* Frameworks */ = {
@@ -45,7 +38,7 @@
 		671443232E45174A004E5A9F = {
 			isa = PBXGroup;
 			children = (
-				6714432E2E45174A004E5A9F /* FakeStoreAPI */,
+				6714434D2E4519FC004E5A9F /* FakeStoreAPI */,
 				6714432D2E45174A004E5A9F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +49,27 @@
 				6714432C2E45174A004E5A9F /* FakeStoreAPI.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6714434D2E4519FC004E5A9F /* FakeStoreAPI */ = {
+			isa = PBXGroup;
+			children = (
+				671443552E4519FF004E5A9F /* RegistrationScreen */,
+				671443442E4519FC004E5A9F /* AppDelegate.swift */,
+				671443452E4519FC004E5A9F /* Assets.xcassets */,
+				671443462E4519FC004E5A9F /* Info.plist */,
+				671443482E4519FC004E5A9F /* LaunchScreen.storyboard */,
+				6714434B2E4519FC004E5A9F /* SceneDelegate.swift */,
+			);
+			path = FakeStoreAPI;
+			sourceTree = "<group>";
+		};
+		671443552E4519FF004E5A9F /* RegistrationScreen */ = {
+			isa = PBXGroup;
+			children = (
+				6714434C2E4519FC004E5A9F /* RegistrationVC.swift */,
+			);
+			path = RegistrationScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -72,9 +86,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				6714432E2E45174A004E5A9F /* FakeStoreAPI */,
 			);
 			name = FakeStoreAPI;
 			packageProductDependencies = (
@@ -122,6 +133,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6714434E2E4519FC004E5A9F /* Assets.xcassets in Resources */,
+				671443502E4519FC004E5A9F /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,10 +145,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				671443522E4519FC004E5A9F /* AppDelegate.swift in Sources */,
+				671443532E4519FC004E5A9F /* SceneDelegate.swift in Sources */,
+				671443542E4519FC004E5A9F /* RegistrationVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		671443482E4519FC004E5A9F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				671443472E4519FC004E5A9F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		671443402E45174C004E5A9F /* Debug */ = {
@@ -150,7 +177,6 @@
 				INFOPLIST_FILE = FakeStoreAPI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -178,7 +204,6 @@
 				INFOPLIST_FILE = FakeStoreAPI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
