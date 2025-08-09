@@ -9,12 +9,20 @@ import UIKit
 
 class RegistrationVC: UIViewController {
     
-    lazy var nameLbl: UILabel = setupLbl(text: "Имя:", color: .black)
-    lazy var lastNameLbl: UILabel = setupLbl(text: "Фамилия:", color: .black)
-    lazy var dateOfBirthLbl: UILabel = setupLbl(text: "Дата рождения:", color: .black)
-    lazy var passwordLbl: UILabel = setupLbl(text: "Пароль", color: .black)
-    lazy var confirmPasswordLbl: UILabel = setupLbl(text: "Подтверждение", color: .black)
+    // MARK: - UI
     
+    // TFs
+    lazy var nameTF: UITextField = setupTFs(text: "Введите имя")
+    lazy var lastNameTF: UITextField = setupTFs(text: "Введите фамилию")
+    lazy var dateOfBirthTF: UITextField = setupTFs(text: "Введите дату рождения")
+    lazy var passwordTF: UITextField = setupTFs(text: "Введите пароль")
+    lazy var confirmPasswordTF: UITextField = setupTFs(text: "Повторите пароль")
+
+    // Lbls
+    lazy var errorNameShortLbl: UILabel = setupLbl(text: "‼️Ошибка: Фамилия слишком короткая", color: .red)
+    lazy var errorPasswordMatchLbl: UILabel = setupLbl(text: "‼️Ошибка: Пароли не совпадают", color: .red)
+
+    //Btn
     lazy var registerBtn: UIButton = {
         $0.setTitle("Зарегистрироваться", for: .normal)
         $0.backgroundColor = .blue
@@ -23,27 +31,26 @@ class RegistrationVC: UIViewController {
         return $0
     }(UIButton())
     
-    lazy var errorNameShortLbl: UILabel = setupLbl(text: "❌Ошибка: Фамилия слишком короткая", color: .red)
-    lazy var errorPasswordMatchLbl: UILabel = setupLbl(text: "❌Ошибка: Пароли не совпадают", color: .red)
-
+    
+    // MARK: -  LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
         title = "Регистрация"
-        
-        view.addSubview(nameLbl)
-        view.addSubview(lastNameLbl)
-        view.addSubview(dateOfBirthLbl)
-        view.addSubview(passwordLbl)
-        view.addSubview(confirmPasswordLbl)
         view.addSubview(registerBtn)
         view.addSubview(errorNameShortLbl)
         view.addSubview(errorPasswordMatchLbl)
-        
+        view.addSubview(nameTF)
+        view.addSubview(lastNameTF)
+        view.addSubview(dateOfBirthTF)
+        view.addSubview(passwordTF)
+        view.addSubview(confirmPasswordTF)
         setupConstraints()
     }
+    
+    
+    // MARK: - setups
     
     func setupLbl(text: String, color: UIColor) -> UILabel {
         let lbl: UILabel = UILabel()
@@ -51,35 +58,43 @@ class RegistrationVC: UIViewController {
         lbl.textColor = color
         lbl.numberOfLines = 0
         lbl.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        lbl.setContentHuggingPriority(.required, for: .horizontal)
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
+    }
+    
+    func setupTFs(text: String) -> UITextField {
+        let tf: UITextField = UITextField()
+        tf.placeholder = text
+        tf.borderStyle = .roundedRect
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        return tf
     }
     
     
     func setupConstraints() {
                 NSLayoutConstraint.activate([
-                    nameLbl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 32),
-                    nameLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                    nameLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                    nameTF.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 32),
+                    nameTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                    nameTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+              
+                    lastNameTF.topAnchor.constraint(equalTo: nameTF.bottomAnchor, constant: 16),
+                    lastNameTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                    lastNameTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+          
+                    dateOfBirthTF.topAnchor.constraint(equalTo: lastNameTF.bottomAnchor, constant: 16),
+                    dateOfBirthTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                    dateOfBirthTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     
-                    lastNameLbl.topAnchor.constraint(equalTo: nameLbl.bottomAnchor, constant: 16),
-                    lastNameLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                    lastNameLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                    passwordTF.topAnchor.constraint(equalTo: dateOfBirthTF.bottomAnchor, constant: 16),
+                    passwordTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                    passwordTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+          
+                    confirmPasswordTF.topAnchor.constraint(equalTo: passwordTF.bottomAnchor, constant: 16),
+                    confirmPasswordTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                    confirmPasswordTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     
-                    dateOfBirthLbl.topAnchor.constraint(equalTo: lastNameLbl.bottomAnchor, constant: 16),
-                    dateOfBirthLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                    dateOfBirthLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                    
-                    passwordLbl.topAnchor.constraint(equalTo: dateOfBirthLbl.bottomAnchor, constant: 16),
-                    passwordLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                    passwordLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                    passwordLbl.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -16),
-                    
-                    confirmPasswordLbl.topAnchor.constraint(equalTo: passwordLbl.bottomAnchor, constant: 16),
-                    confirmPasswordLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                    confirmPasswordLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                    
-                    registerBtn.topAnchor.constraint(equalTo: confirmPasswordLbl.bottomAnchor, constant: 16),
+                    registerBtn.topAnchor.constraint(equalTo: confirmPasswordTF.bottomAnchor, constant: 16),
                     registerBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
                     registerBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     registerBtn.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -16),
