@@ -11,22 +11,25 @@ class RegistrationVC: UIViewController {
     
     // MARK: - UI
     
+    var picker = UIPickerView()
+    
     // TFs
-    lazy var nameTF: UITextField = setupTFs(text: "Введите имя")
-    lazy var lastNameTF: UITextField = setupTFs(text: "Введите фамилию")
-    lazy var dateOfBirthTF: UITextField = setupTFs(text: "Введите дату рождения")
-    lazy var passwordTF: UITextField = setupTFs(text: "Введите пароль")
-    lazy var confirmPasswordTF: UITextField = setupTFs(text: "Повторите пароль")
+    lazy var nameTF: UITextField = setupTFs(text: "Введите имя", secure: false)
+    lazy var lastNameTF: UITextField = setupTFs(text: "Введите фамилию", secure: false)
+    lazy var dateOfBirthTF: UITextField = setupTFs(text: "Введите дату рождения", secure: false)
+    lazy var passwordTF: UITextField = setupTFs(text: "Введите пароль", secure: true)
+    lazy var confirmPasswordTF: UITextField = setupTFs(text: "Повторите пароль", secure: true)
 
     // Lbls
-    lazy var errorNameShortLbl: UILabel = setupLbl(text: "‼️Ошибка: Фамилия слишком короткая", color: .red)
-    lazy var errorPasswordMatchLbl: UILabel = setupLbl(text: "‼️Ошибка: Пароли не совпадают", color: .red)
+    lazy var errorNameShortLbl: UILabel = setupLbl(text: "Ошибка: имя и фамилия должны содержать только буквы", color: .systemRed)
+    lazy var errorPasswordMatchLbl: UILabel = setupLbl(text: "Ошибка: пароли не совпадают", color: .systemRed)
 
     //Btn
     lazy var registerBtn: UIButton = {
         $0.setTitle("Зарегистрироваться", for: .normal)
-        $0.backgroundColor = .blue
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        $0.backgroundColor = .systemBlue
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        $0.layer.cornerRadius = 5
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIButton())
@@ -38,35 +41,87 @@ class RegistrationVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = "Регистрация"
-        view.addSubview(registerBtn)
-        view.addSubview(errorNameShortLbl)
-        view.addSubview(errorPasswordMatchLbl)
-        view.addSubview(nameTF)
-        view.addSubview(lastNameTF)
-        view.addSubview(dateOfBirthTF)
-        view.addSubview(passwordTF)
-        view.addSubview(confirmPasswordTF)
+        [
+            registerBtn,
+            errorNameShortLbl,
+            errorPasswordMatchLbl,
+            nameTF,
+            lastNameTF,
+            dateOfBirthTF,
+            passwordTF,
+            confirmPasswordTF
+        ].forEach {view.addSubview($0)}
         setupConstraints()
+        setupPicker()
     }
     
     
     // MARK: - setups
+    
+//    func correctName(name: String, lastName: String) -> String {
+//        /*
+//         если имя содержит не буквы, то errorNameShortLbl = "Имя и фамилия должны содержать только буквы"
+//         если все норм, то ошибка не должна высвечиваться
+//         */
+//    }
+    
+//    func passwordMatch(password: String, confirmPassword: String) -> String {
+//        /*
+//         if passwordTF !== confirmPasswordTF {
+//            errorPasswordMatchLbl = Пароли не совпадают
+//         */
+//    }
+    
+    
+    func setupPicker() {
+        // сам UIDatePicker
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.maximumDate = Date() // запрет будущих дат
+        datePicker.locale = Locale(identifier: "ru_RU")
+        
+        // Обновляем текст при изменении даты
+        datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
+        
+        // Назначаем его как inputView для текстового поля
+        dateOfBirthTF.inputView = datePicker
+        
+        // Тулбар с кнопкой "Готово"
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissPicker))
+        toolbar.setItems([doneBtn], animated: false)
+        dateOfBirthTF.inputAccessoryView = toolbar
+    }
+    
+    @objc func dateChanged(_ sender: UIDatePicker) {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.locale = Locale(identifier: "ru_RU")
+        dateOfBirthTF.text = formatter.string(from: sender.date)
+    }
+
+    @objc func dismissPicker() {
+        view.endEditing(true)
+    }
     
     func setupLbl(text: String, color: UIColor) -> UILabel {
         let lbl: UILabel = UILabel()
         lbl.text = text
         lbl.textColor = color
         lbl.numberOfLines = 0
-        lbl.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        lbl.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         lbl.setContentHuggingPriority(.required, for: .horizontal)
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
     }
     
-    func setupTFs(text: String) -> UITextField {
+    func setupTFs(text: String, secure: Bool) -> UITextField {
         let tf: UITextField = UITextField()
         tf.placeholder = text
         tf.borderStyle = .roundedRect
+        tf.isSecureTextEntry = secure
         tf.translatesAutoresizingMaskIntoConstraints = false
         return tf
     }
@@ -94,7 +149,7 @@ class RegistrationVC: UIViewController {
                     confirmPasswordTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
                     confirmPasswordTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     
-                    registerBtn.topAnchor.constraint(equalTo: confirmPasswordTF.bottomAnchor, constant: 16),
+                    registerBtn.topAnchor.constraint(equalTo: confirmPasswordTF.bottomAnchor, constant: 32),
                     registerBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
                     registerBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     registerBtn.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -16),

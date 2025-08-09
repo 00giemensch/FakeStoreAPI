@@ -54,6 +54,7 @@
 		6714434D2E4519FC004E5A9F /* FakeStoreAPI */ = {
 			isa = PBXGroup;
 			children = (
+				67448E842E47BB6E00CB8DA8 /* New Group */,
 				671443552E4519FF004E5A9F /* RegistrationScreen */,
 				671443442E4519FC004E5A9F /* AppDelegate.swift */,
 				671443452E4519FC004E5A9F /* Assets.xcassets */,
@@ -70,6 +71,13 @@
 				6714434C2E4519FC004E5A9F /* RegistrationVC.swift */,
 			);
 			path = RegistrationScreen;
+			sourceTree = "<group>";
+		};
+		67448E842E47BB6E00CB8DA8 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
