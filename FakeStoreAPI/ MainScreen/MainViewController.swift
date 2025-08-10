@@ -34,7 +34,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
-        title = "Главный экран"
+        title = "Магазин"
         
         view.addSubview(greetingsLbl)
         view.addSubview(tableView)
@@ -42,8 +42,7 @@ class MainViewController: UIViewController {
         setupConstraints()
     }
     
-    
-    
+        
     func setupConstraints() {
         NSLayoutConstraint.activate([
             greetingsLbl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 16),
