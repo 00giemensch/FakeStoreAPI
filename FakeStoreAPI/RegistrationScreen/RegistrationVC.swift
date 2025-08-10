@@ -92,24 +92,51 @@ class RegistrationVC: UIViewController {
 //    }
     func handleReg() {
         
-        var hasError = true
-        hasError = false // исправили ошибки
+        var hasError = false
+//        hasError = false // исправили ошибки
         
+        // проверка совпадения пароля
+//        var passwordConfirmed: Bool?
+        
+        if passwordTF.text != confirmPasswordTF.text {
+            print("пароли не совпадают")
+            errorPasswordMatchLbl.isHidden = false
+//            passwordConfirmed = false
+            hasError = true
+        } else {
+            errorPasswordMatchLbl.isHidden = true
+            print("пароли совпадают")
+//            passwordConfirmed = true
+//            hasError = false
+        }
+        
+        //проверка заполнения полей
+        if nameTF.text == "" || lastNameTF.text == "" || dateOfBirthTF.text == "" || passwordTF.text == "" || confirmPasswordTF.text == "" {
+            print("заполните все поля")
+            errorEmptyLbl.isHidden = false
+            hasError = true
+        } else {
+            errorEmptyLbl.isHidden = true
+//            hasError = false
+        }
+        
+//        if lastNameTF
+
+//            || lastNameTF || dateOfBirthTF || passwordTF || confirmPasswordTF
         
         if !hasError { // если ошибок нет, то:
-            let secondVC = MainViewController()
-            self.navigationController?.pushViewController(secondVC, animated: true)
-            
             UserDefaults.standard.set("\(nameTF.text ?? "")", forKey: "username")
             UserDefaults.standard.set(true, forKey: "isRegistered")
+            
+            let secondVC = MainViewController()
+            self.navigationController?.pushViewController(secondVC, animated: true)
         }
         
-        
-        if hasError { // если ошибки есть, то:
-            errorNameShortLbl.isHidden = false
-            errorPasswordMatchLbl.isHidden = false
-            errorEmptyLbl.isHidden = false
-        }
+//        if hasError { // если ошибки есть, то:
+//            errorNameShortLbl.isHidden = false
+//            errorPasswordMatchLbl.isHidden = false
+//            errorEmptyLbl.isHidden = false
+//        }
         
         
     }

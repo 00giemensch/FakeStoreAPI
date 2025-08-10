@@ -26,6 +26,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window?.rootViewController = UINavigationController(rootViewController: RegistrationVC())
         }
         
+//            self.window?.rootViewController = UINavigationController(rootViewController: RegistrationVC())
+        
+        
         self.window?.makeKeyAndVisible()
     }
 
