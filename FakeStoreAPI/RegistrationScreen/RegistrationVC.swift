@@ -13,6 +13,8 @@ class RegistrationVC: UIViewController {
     
     var picker = UIPickerView()
     
+    var username: String?
+    
     // TFs
     lazy var nameTF: UITextField = setupTFs(text: "Введите имя", secure: false)
     lazy var lastNameTF: UITextField = setupTFs(text: "Введите фамилию", secure: false)
@@ -20,13 +22,12 @@ class RegistrationVC: UIViewController {
     lazy var passwordTF: UITextField = setupTFs(text: "Введите пароль", secure: true)
     lazy var confirmPasswordTF: UITextField = setupTFs(text: "Повторите пароль", secure: true)
 
-    // Lbls
+    // Lbls(errors) - по умолчанию скрыты
     lazy var errorNameShortLbl: UILabel = setupLbl(text: "Ошибка: имя и фамилия должны содержать только буквы", color: .systemRed)
     lazy var errorPasswordMatchLbl: UILabel = setupLbl(text: "Ошибка: пароли не совпадают", color: .systemRed)
+    lazy var errorEmptyLbl: UILabel = setupLbl(text: "Ошибка: заполните все поля", color: .systemRed)
 
     //Btn
-    
-
     
     lazy var registerBtn: UIButton = {
         $0.setTitle("Зарегистрироваться", for: .normal)
@@ -35,8 +36,7 @@ class RegistrationVC: UIViewController {
         $0.layer.cornerRadius = 5
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.addAction(UIAction { [weak self] _ in
-            let secondVC = MainViewController()
-            self?.navigationController?.pushViewController(secondVC, animated: true)
+                self?.handleReg()
         }, for: .touchUpInside)
         return $0
     }(UIButton())
@@ -52,12 +52,24 @@ class RegistrationVC: UIViewController {
             registerBtn,
             errorNameShortLbl,
             errorPasswordMatchLbl,
+            errorEmptyLbl,
             nameTF,
             lastNameTF,
             dateOfBirthTF,
             passwordTF,
             confirmPasswordTF
         ].forEach {view.addSubview($0)}
+        
+        // изначально ошибки скрыты
+        errorNameShortLbl.isHidden = true
+        errorPasswordMatchLbl.isHidden = true
+        errorEmptyLbl.isHidden = true
+        
+//        // прячем ошибки при вводе новых символов
+//          [nameTF, lastNameTF, passwordTF, confirmPasswordTF].forEach {
+//              $0.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+//          }
+        
         setupConstraints()
         setupPicker()
     }
@@ -78,7 +90,29 @@ class RegistrationVC: UIViewController {
 //            errorPasswordMatchLbl = Пароли не совпадают
 //         */
 //    }
-    
+    func handleReg() {
+        
+        var hasError = true
+        hasError = false // исправили ошибки
+        
+        
+        if !hasError { // если ошибок нет, то:
+            let secondVC = MainViewController()
+            self.navigationController?.pushViewController(secondVC, animated: true)
+            
+            UserDefaults.standard.set("\(nameTF.text ?? "")", forKey: "username")
+            UserDefaults.standard.set(true, forKey: "isRegistered")
+        }
+        
+        
+        if hasError { // если ошибки есть, то:
+            errorNameShortLbl.isHidden = false
+            errorPasswordMatchLbl.isHidden = false
+            errorEmptyLbl.isHidden = false
+        }
+        
+        
+    }
     
     func setupPicker() {
         // сам UIDatePicker
@@ -165,7 +199,11 @@ class RegistrationVC: UIViewController {
                     errorNameShortLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
                     errorNameShortLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     
-                    errorPasswordMatchLbl.topAnchor.constraint(equalTo: errorNameShortLbl.bottomAnchor, constant: 16),
+                    errorEmptyLbl.topAnchor.constraint(equalTo: errorNameShortLbl.bottomAnchor, constant: 16),
+                    errorEmptyLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                    errorEmptyLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                    
+                    errorPasswordMatchLbl.topAnchor.constraint(equalTo: errorEmptyLbl.bottomAnchor, constant: 16),
                     errorPasswordMatchLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
                     errorPasswordMatchLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     errorPasswordMatchLbl.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -16),

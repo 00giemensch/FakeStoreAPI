@@ -10,6 +10,7 @@ import UIKit
 class MainViewController: UIViewController {
     
     var tableData = Item.mockData()
+    private var username: String?
     
     private lazy var tableView: UITableView = {
         $0.dataSource = self //связь таблицы с моделью
@@ -23,8 +24,8 @@ class MainViewController: UIViewController {
         return $0
     }(UITableView())
     
-    let greetingsLbl: UILabel = {
-        $0.text = "Привет, анонимный пользователь!"
+    lazy var greetingsLbl: UILabel = {
+        $0.text = "Привет, \(username!)!"
         $0.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         $0.setContentHuggingPriority(.required, for: .horizontal)
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -35,6 +36,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
         title = "Магазин"
+        username = UserDefaults.standard.string(forKey: "username")
         
         view.addSubview(greetingsLbl)
         view.addSubview(tableView)
