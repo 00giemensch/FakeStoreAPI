@@ -54,6 +54,10 @@ class RegistrationVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = "Регистрация"
+        
+        let service = NetworkService()
+        service.sendRequest()
+        
         [
             registerBtn,
             nameTF,
@@ -145,7 +149,7 @@ class RegistrationVC: UIViewController {
         lbl.text = text
         lbl.textColor = color
         lbl.numberOfLines = 0
-        lbl.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        lbl.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         lbl.setContentHuggingPriority(.required, for: .horizontal)
         lbl.translatesAutoresizingMaskIntoConstraints = false
         return lbl
@@ -167,19 +171,19 @@ class RegistrationVC: UIViewController {
                     nameTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
                     nameTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
               
-                    lastNameTF.topAnchor.constraint(equalTo: nameTF.bottomAnchor, constant: 16),
+                    lastNameTF.topAnchor.constraint(equalTo: nameTF.bottomAnchor, constant: 20),
                     lastNameTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
                     lastNameTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
           
-                    dateOfBirthTF.topAnchor.constraint(equalTo: lastNameTF.bottomAnchor, constant: 16),
+                    dateOfBirthTF.topAnchor.constraint(equalTo: lastNameTF.bottomAnchor, constant: 20),
                     dateOfBirthTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
                     dateOfBirthTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     
-                    passwordTF.topAnchor.constraint(equalTo: dateOfBirthTF.bottomAnchor, constant: 16),
+                    passwordTF.topAnchor.constraint(equalTo: dateOfBirthTF.bottomAnchor, constant: 20),
                     passwordTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
                     passwordTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
           
-                    confirmPasswordTF.topAnchor.constraint(equalTo: passwordTF.bottomAnchor, constant: 16),
+                    confirmPasswordTF.topAnchor.constraint(equalTo: passwordTF.bottomAnchor, constant: 20),
                     confirmPasswordTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
                     confirmPasswordTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     
