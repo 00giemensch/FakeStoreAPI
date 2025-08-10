@@ -64,14 +64,12 @@
 		6714434D2E4519FC004E5A9F /* FakeStoreAPI */ = {
 			isa = PBXGroup;
 			children = (
-				67448E842E47BB6E00CB8DA8 /*  MainScreen */,
+				6773B5882E4936D900122B90 /* Delegates */,
+				6773B5872E4936C000122B90 /* Resources */,
+				6773B5862E49369C00122B90 /* Network */,
+				67448E842E47BB6E00CB8DA8 /* MainScreen */,
 				671443552E4519FF004E5A9F /* RegistrationScreen */,
-				671443442E4519FC004E5A9F /* AppDelegate.swift */,
-				671443452E4519FC004E5A9F /* Assets.xcassets */,
-				671443462E4519FC004E5A9F /* Info.plist */,
 				671443482E4519FC004E5A9F /* LaunchScreen.storyboard */,
-				6714434B2E4519FC004E5A9F /* SceneDelegate.swift */,
-				6773B5822E4927E700122B90 /* NetworkService.swift */,
 			);
 			path = FakeStoreAPI;
 			sourceTree = "<group>";
@@ -84,14 +82,15 @@
 			path = RegistrationScreen;
 			sourceTree = "<group>";
 		};
-		67448E842E47BB6E00CB8DA8 /*  MainScreen */ = {
+		67448E842E47BB6E00CB8DA8 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				6773B58A2E4937DA00122B90 /* Controller */,
+				6773B5892E4937D200122B90 /* View */,
 				6751D6EC2E47DF3F00D45937 /* Model */,
-				67448E852E47BCCC00CB8DA8 /* MainViewController.swift */,
 				6751D6EF2E47E15400D45937 /* ItemCell.swift */,
 			);
-			path = " MainScreen";
+			path = MainScreen;
 			sourceTree = "<group>";
 		};
 		6751D6EC2E47DF3F00D45937 /* Model */ = {
@@ -101,6 +100,47 @@
 				6773B5842E492B0D00122B90 /* StoreItem.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		6773B5862E49369C00122B90 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6773B5822E4927E700122B90 /* NetworkService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		6773B5872E4936C000122B90 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				671443462E4519FC004E5A9F /* Info.plist */,
+				671443452E4519FC004E5A9F /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6773B5882E4936D900122B90 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				671443442E4519FC004E5A9F /* AppDelegate.swift */,
+				6714434B2E4519FC004E5A9F /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		6773B5892E4937D200122B90 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6773B58A2E4937DA00122B90 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				67448E852E47BCCC00CB8DA8 /* MainViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,7 +250,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4MBS9NYJ9X;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FakeStoreAPI/Info.plist;
+				INFOPLIST_FILE = FakeStoreAPI/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -237,7 +277,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4MBS9NYJ9X;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FakeStoreAPI/Info.plist;
+				INFOPLIST_FILE = FakeStoreAPI/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
