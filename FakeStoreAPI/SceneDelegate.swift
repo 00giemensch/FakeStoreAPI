@@ -20,13 +20,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let isRegistered = UserDefaults.standard.bool(forKey: "isRegistered")
         
-        if isRegistered {
-            self.window?.rootViewController = UINavigationController(rootViewController: MainViewController())
-        } else {
-            self.window?.rootViewController = UINavigationController(rootViewController: RegistrationVC())
-        }
-        
+//        if isRegistered {
+//            self.window?.rootViewController = UINavigationController(rootViewController: MainViewController())
+//        } else {
 //            self.window?.rootViewController = UINavigationController(rootViewController: RegistrationVC())
+//        }
+        
+            self.window?.rootViewController = UINavigationController(rootViewController: RegistrationVC())
         
         
         self.window?.makeKeyAndVisible()

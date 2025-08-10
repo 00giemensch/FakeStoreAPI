@@ -22,12 +22,10 @@ class RegistrationVC: UIViewController {
     lazy var confirmPasswordTF: UITextField = setupTFs(text: "Повторите пароль", secure: true)
 
     // Lbls(errors) - по умолчанию скрыты
-    lazy var errorNameShortLbl: UILabel = setupLbl(text: "Ошибка: имя и фамилия должны содержать только буквы", color: .systemRed)
     lazy var errorPasswordMatchLbl: UILabel = setupLbl(text: "Ошибка: пароли не совпадают", color: .systemRed)
     lazy var errorEmptyLbl: UILabel = setupLbl(text: "Ошибка: заполните все поля", color: .systemRed)
 
     //Btn
-    
     lazy var registerBtn: UIButton = {
         $0.setTitle("Зарегистрироваться", for: .normal)
         $0.backgroundColor = .systemBlue
@@ -40,6 +38,15 @@ class RegistrationVC: UIViewController {
         return $0
     }(UIButton())
     
+    lazy var errorsStack: UIStackView = {
+        $0.axis = .vertical
+        $0.spacing = 8
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.addArrangedSubview(errorPasswordMatchLbl)
+        $0.addArrangedSubview(errorEmptyLbl)
+        return $0
+    }(UIStackView())
+    
     
     // MARK: -  LifeCycle
     
@@ -49,18 +56,15 @@ class RegistrationVC: UIViewController {
         title = "Регистрация"
         [
             registerBtn,
-            errorNameShortLbl,
-            errorPasswordMatchLbl,
-            errorEmptyLbl,
             nameTF,
             lastNameTF,
             dateOfBirthTF,
             passwordTF,
-            confirmPasswordTF
+            confirmPasswordTF,
+            errorsStack
         ].forEach {view.addSubview($0)}
         
         // изначально ошибки скрыты
-        errorNameShortLbl.isHidden = true
         errorPasswordMatchLbl.isHidden = true
         errorEmptyLbl.isHidden = true
         
@@ -70,7 +74,7 @@ class RegistrationVC: UIViewController {
     
     
     // MARK: - setups
-
+    
     func handleReg() {
         var hasError = false
 
@@ -184,19 +188,10 @@ class RegistrationVC: UIViewController {
                     registerBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
                     registerBtn.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -16),
                     
-                    errorNameShortLbl.topAnchor.constraint(equalTo: registerBtn.bottomAnchor, constant: 16),
-                    errorNameShortLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                    errorNameShortLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                    
-                    errorEmptyLbl.topAnchor.constraint(equalTo: errorNameShortLbl.bottomAnchor, constant: 16),
-                    errorEmptyLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                    errorEmptyLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                    
-                    errorPasswordMatchLbl.topAnchor.constraint(equalTo: errorEmptyLbl.bottomAnchor, constant: 16),
-                    errorPasswordMatchLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                    errorPasswordMatchLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                    errorPasswordMatchLbl.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -16),
-
+                    errorsStack.topAnchor.constraint(equalTo: registerBtn.bottomAnchor, constant: 16),
+                    errorsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                    errorsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                    errorsStack.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -16)
                 ])
         }
 
