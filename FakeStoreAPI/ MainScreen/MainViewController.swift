@@ -49,7 +49,7 @@ class MainViewController: UIViewController {
             greetingsLbl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             greetingsLbl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            tableView.topAnchor.constraint(equalTo: greetingsLbl.bottomAnchor, constant: 8),
+            tableView.topAnchor.constraint(equalTo: greetingsLbl.bottomAnchor, constant: 30),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),

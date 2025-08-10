@@ -13,17 +13,18 @@ final class ItemCell: UITableViewCell {
     
     
     lazy var btn: UIButton = {
-        let action = UIAction(handler: { [weak self] _ in
-            self?.completion?()
-        })
-        let btn = UIButton(primaryAction: action)
-        btn.backgroundColor = .blue
-        btn.setTitleColor(.white, for: .normal)
-        btn.layer.cornerRadius = 20
-        btn.setTitle("Купить", for: .normal)
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        return btn
-    }()
+        $0.backgroundColor = .blue
+        $0.setTitleColor(.white, for: .normal)
+        $0.layer.cornerRadius = 20
+        $0.setTitle("Купить", for: .normal)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UIButton(primaryAction: action))
+    
+    lazy var action = UIAction(handler: { [weak self] _ in
+        self?.completion?()
+    })
+    
 // Lbls
     lazy var cellTitleLbl: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
