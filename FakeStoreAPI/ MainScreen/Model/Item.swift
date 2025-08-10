@@ -36,24 +36,8 @@ struct Item: Identifiable {
             Item(price: "$40", title: "худи", image: "img1"),
             Item(price: "$10", title: "шапка", image: "img2"),
             Item(price: "$99", title: "куртка", image: "img3"),
-//            Item(title: "сендвич", image: "img4"),
-//            Item(title: "сендвич", image: "img4"),
-//            Item(title: "сендвич", image: "img4"),
-//                        
-//            Item(title: "блок сигарет", image: "img2"),
-//            Item(title: "зажигалка", image: "img3"),
-//            Item(title: "сендвич", image: "img4"),
-//            Item(title: "сендвич", image: "img4"),
-//            Item(title: "сендвич", image: "img4"),
+
         ]
     }
     
-//    static func mockData() -> [Item] {
-//        [
-//            Item(price: "$500", title: "худи", image: "img1"),
-//            Item(price: "$100", title: "блок сигарет", image: "img2"),
-//            Item(price: "$23", title: "зажигалка", image: "img3"),
-//            Item(price: "4", title: "сендвич", image: "img4"),
-//        ]
-//    }
 }
