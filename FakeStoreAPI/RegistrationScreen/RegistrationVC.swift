@@ -55,8 +55,7 @@ class RegistrationVC: UIViewController {
         view.backgroundColor = .white
         title = "Регистрация"
         
-        let service = NetworkService()
-        service.sendRequest()
+
         
         [
             registerBtn,

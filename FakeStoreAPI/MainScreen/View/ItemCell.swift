@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ItemCell: UITableViewCell {
     
@@ -70,10 +71,16 @@ final class ItemCell: UITableViewCell {
     }
      
     
-    func setupCell(item: Item) {
+    func setupCell(item: StoreItem) {
         cellTitleLbl.text = item.title
-        cellPriceLbl.text = item.price
-        cellImage.image = UIImage(named: item.image)
+        cellPriceLbl.text = String(item.price!)
+        
+        if let urlString = item.image, let url = URL(string: urlString) {
+                cellImage.kf.setImage(with: url)
+            } else {
+                cellImage.image = nil
+            }
+        
         contentView.addSubview(cellTitleLbl)
         contentView.addSubview(cellPriceLbl)
         contentView.addSubview(cellImage)

@@ -3,13 +3,12 @@
 
 # Xcode
 *.xcuserstate
-*.xcworkspace
 xcuserdata/
 DerivedData/
 
 # SwiftPM
 .build/
-Package.resolved
+# Package.resolved
 
 # CocoaPods 
 Pods/
