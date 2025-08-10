@@ -12,7 +12,6 @@ class RegistrationVC: UIViewController {
     // MARK: - UI
     
     var picker = UIPickerView()
-    
     var username: String?
     
     // TFs
@@ -65,65 +64,36 @@ class RegistrationVC: UIViewController {
         errorPasswordMatchLbl.isHidden = true
         errorEmptyLbl.isHidden = true
         
-//        // прячем ошибки при вводе новых символов
-//          [nameTF, lastNameTF, passwordTF, confirmPasswordTF].forEach {
-//              $0.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
-//          }
-        
         setupConstraints()
         setupPicker()
     }
     
     
     // MARK: - setups
-    
-//    func correctName(name: String, lastName: String) -> String {
-//        /*
-//         если имя содержит не буквы, то errorNameShortLbl = "Имя и фамилия должны содержать только буквы"
-//         если все норм, то ошибка не должна высвечиваться
-//         */
-//    }
-    
-//    func passwordMatch(password: String, confirmPassword: String) -> String {
-//        /*
-//         if passwordTF !== confirmPasswordTF {
-//            errorPasswordMatchLbl = Пароли не совпадают
-//         */
-//    }
+
     func handleReg() {
-        
         var hasError = false
-//        hasError = false // исправили ошибки
-        
+
         // проверка совпадения пароля
-//        var passwordConfirmed: Bool?
-        
         if passwordTF.text != confirmPasswordTF.text {
-            print("пароли не совпадают")
+            // print("пароли не совпадают")
             errorPasswordMatchLbl.isHidden = false
-//            passwordConfirmed = false
             hasError = true
         } else {
             errorPasswordMatchLbl.isHidden = true
-            print("пароли совпадают")
-//            passwordConfirmed = true
-//            hasError = false
+            // print("пароли совпадают")
         }
         
         //проверка заполнения полей
         if nameTF.text == "" || lastNameTF.text == "" || dateOfBirthTF.text == "" || passwordTF.text == "" || confirmPasswordTF.text == "" {
-            print("заполните все поля")
+            // print("заполните все поля")
             errorEmptyLbl.isHidden = false
             hasError = true
         } else {
             errorEmptyLbl.isHidden = true
-//            hasError = false
         }
         
-//        if lastNameTF
 
-//            || lastNameTF || dateOfBirthTF || passwordTF || confirmPasswordTF
-        
         if !hasError { // если ошибок нет, то:
             UserDefaults.standard.set("\(nameTF.text ?? "")", forKey: "username")
             UserDefaults.standard.set(true, forKey: "isRegistered")
@@ -131,14 +101,6 @@ class RegistrationVC: UIViewController {
             let secondVC = MainViewController()
             self.navigationController?.pushViewController(secondVC, animated: true)
         }
-        
-//        if hasError { // если ошибки есть, то:
-//            errorNameShortLbl.isHidden = false
-//            errorPasswordMatchLbl.isHidden = false
-//            errorEmptyLbl.isHidden = false
-//        }
-        
-        
     }
     
     func setupPicker() {

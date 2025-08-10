@@ -13,14 +13,11 @@ class MainViewController: UIViewController {
     private var username: String?
     
     private lazy var tableView: UITableView = {
-        $0.dataSource = self //связь таблицы с моделью
+        $0.dataSource = self 
         $0.delegate = self
         $0.register(ItemCell.self, forCellReuseIdentifier: "Cell")
-//        $0.separatorStyle = .none //удаление линий между ячейками
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.rowHeight = 100
-//        $0.estimatedRowHeight = 100
-//        $0.style = .insetGrouped
         return $0
     }(UITableView())
     
