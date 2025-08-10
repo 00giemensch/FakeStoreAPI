@@ -29,18 +29,17 @@ class RegistrationVC: UIViewController {
 
     
     lazy var registerBtn: UIButton = {
-        let action = UIAction { [weak self] _ in
+        $0.setTitle("Зарегистрироваться", for: .normal)
+        $0.backgroundColor = .systemBlue
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        $0.layer.cornerRadius = 5
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.addAction(UIAction { [weak self] _ in
             let secondVC = MainViewController()
             self?.navigationController?.pushViewController(secondVC, animated: true)
-        }
-        let button = UIButton(primaryAction: action)
-        button.setTitle("Зарегистрироваться", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        button.layer.cornerRadius = 5
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+        }, for: .touchUpInside)
+        return $0
+    }(UIButton())
     
     
     // MARK: -  LifeCycle
