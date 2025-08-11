@@ -12,35 +12,8 @@ final class ItemCell: UITableViewCell {
     
     var completion: ( () -> Void )?
     
-    
-    lazy var btn: UIButton = {
-        $0.backgroundColor = .blue
-        $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 20
-        $0.setTitle("Купить", for: .normal)
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        return $0
-    }(UIButton(primaryAction: action))
-    
-    lazy var action = UIAction(handler: { [weak self] _ in
-        self?.completion?()
-    })
-    
-// Lbls
-    lazy var cellTitleLbl: UILabel = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        $0.textColor = .black
-        return $0
-    }(UILabel())
-    
-    lazy var cellPriceLbl: UILabel = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        $0.textColor = .systemGreen
-        return $0
-    }(UILabel())
-//
+    lazy var cellTitleLbl: UILabel = setupLbl(size: 18, weight: .semibold, color: .black)
+    lazy var cellPriceLbl: UILabel = setupLbl(size: 16, weight: .medium, color: .systemGreen)
     
     lazy var cellView: UIView = {
         $0.backgroundColor = .clear
@@ -48,13 +21,12 @@ final class ItemCell: UITableViewCell {
         $0.heightAnchor.constraint(equalToConstant: 150).isActive = true
         return $0
     }(UIView())
-
     
     lazy var cellImage: UIImageView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.heightAnchor.constraint(equalToConstant: 80).isActive = true
         $0.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        $0.contentMode = .scaleAspectFill
+        $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         return $0
     }(UIImageView())
@@ -63,6 +35,11 @@ final class ItemCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         clipsToBounds = true
+        
+        contentView.addSubview(cellTitleLbl)
+        contentView.addSubview(cellPriceLbl)
+        contentView.addSubview(cellImage)
+        setupConstraints()
     }
     
     override func prepareForReuse() {
@@ -71,37 +48,43 @@ final class ItemCell: UITableViewCell {
     }
      
     
-    func setupCell(item: StoreItem) {
-        cellTitleLbl.text = item.title
-        cellPriceLbl.text = String(item.price!)
+    func configuration(item: StoreItem) {
+        cellTitleLbl.text = item.title ?? "Без названия"
+        cellPriceLbl.text = "$\((item.price!))"
         
         if let urlString = item.image, let url = URL(string: urlString) {
                 cellImage.kf.setImage(with: url)
             } else {
                 cellImage.image = nil
             }
-        
-        contentView.addSubview(cellTitleLbl)
-        contentView.addSubview(cellPriceLbl)
-        contentView.addSubview(cellImage)
-        setupConstraints()
     }
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            cellImage.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 10),
             cellImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            cellImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+
             
-            cellTitleLbl.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 1),
+            cellTitleLbl.topAnchor.constraint(equalTo: cellImage.topAnchor,constant: 3),
+            cellTitleLbl.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             cellTitleLbl.leadingAnchor.constraint(equalTo: cellImage.trailingAnchor, constant: 16),
-            cellTitleLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            cellTitleLbl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            cellTitleLbl.trailingAnchor.constraint(equalTo: cellPriceLbl.leadingAnchor, constant: -8),
             
-            cellPriceLbl.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 1),
             cellPriceLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            cellPriceLbl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            cellPriceLbl.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            cellPriceLbl.widthAnchor.constraint(equalToConstant: 80),
             
+            cellTitleLbl.trailingAnchor.constraint(equalTo: cellPriceLbl.leadingAnchor, constant: -8),
         ])
+    }
+    
+    func setupLbl(size: Int, weight: UIFont.Weight, color: UIColor) -> UILabel {
+        let lbl: UILabel = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.font = UIFont.systemFont(ofSize: CGFloat(size), weight: weight)
+        lbl.textColor = color
+        lbl.textAlignment = .right
+        return lbl
     }
     
     

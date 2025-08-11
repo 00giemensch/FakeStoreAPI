@@ -55,8 +55,6 @@ class RegistrationVC: UIViewController {
         view.backgroundColor = .white
         title = "Регистрация"
         
-
-        
         [
             registerBtn,
             nameTF,
