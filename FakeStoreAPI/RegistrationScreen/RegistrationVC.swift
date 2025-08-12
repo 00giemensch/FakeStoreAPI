@@ -9,23 +9,21 @@ import UIKit
 
 class RegistrationVC: UIViewController {
     
-    // MARK: - UI
+    // MARK: - Properties
     
     var picker = UIPickerView()
     var username: String?
     
-    // TFs
+    // MARK: - UI Elements
     lazy var nameTF: UITextField = setupTFs(text: "Введите имя", secure: false)
     lazy var lastNameTF: UITextField = setupTFs(text: "Введите фамилию", secure: false)
     lazy var dateOfBirthTF: UITextField = setupTFs(text: "Введите дату рождения", secure: false)
     lazy var passwordTF: UITextField = setupTFs(text: "Введите пароль", secure: true)
     lazy var confirmPasswordTF: UITextField = setupTFs(text: "Повторите пароль", secure: true)
 
-    // Lbls(errors) - по умолчанию скрыты
     lazy var errorPasswordMatchLbl: UILabel = setupLbl(text: "Ошибка: пароли не совпадают", color: .systemRed)
     lazy var errorEmptyLbl: UILabel = setupLbl(text: "Ошибка: заполните все поля", color: .systemRed)
 
-    //Btn
     lazy var registerBtn: UIButton = {
         $0.setTitle("Зарегистрироваться", for: .normal)
         $0.backgroundColor = .systemBlue
@@ -65,7 +63,6 @@ class RegistrationVC: UIViewController {
             errorsStack
         ].forEach {view.addSubview($0)}
         
-        // изначально ошибки скрыты
         errorPasswordMatchLbl.isHidden = true
         errorEmptyLbl.isHidden = true
         
@@ -73,8 +70,7 @@ class RegistrationVC: UIViewController {
         setupPicker()
     }
     
-    
-    // MARK: - setups
+    // MARK: - Actions
     
     func handleReg() {
         var hasError = false
@@ -108,59 +104,23 @@ class RegistrationVC: UIViewController {
         }
     }
     
+    // MARK: - UI Setup
+    
     func setupPicker() {
-        // сам UIDatePicker
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.maximumDate = Date() // запрет будущих дат
         datePicker.locale = Locale(identifier: "ru_RU")
-        
-        // Обновляем текст при изменении даты
         datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
-        
-        // Назначаем его как inputView для текстового поля
         dateOfBirthTF.inputView = datePicker
         
-        // Тулбар с кнопкой "Готово"
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissPicker))
         toolbar.setItems([doneBtn], animated: false)
         dateOfBirthTF.inputAccessoryView = toolbar
     }
-    
-    @objc func dateChanged(_ sender: UIDatePicker) {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.locale = Locale(identifier: "ru_RU")
-        dateOfBirthTF.text = formatter.string(from: sender.date)
-    }
-
-    @objc func dismissPicker() {
-        view.endEditing(true)
-    }
-    
-    func setupLbl(text: String, color: UIColor) -> UILabel {
-        let lbl: UILabel = UILabel()
-        lbl.text = text
-        lbl.textColor = color
-        lbl.numberOfLines = 0
-        lbl.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        lbl.setContentHuggingPriority(.required, for: .horizontal)
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        return lbl
-    }
-    
-    func setupTFs(text: String, secure: Bool) -> UITextField {
-        let tf: UITextField = UITextField()
-        tf.placeholder = text
-        tf.borderStyle = .roundedRect
-        tf.isSecureTextEntry = secure
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        return tf
-    }
-    
     
     func setupConstraints() {
                 NSLayoutConstraint.activate([
@@ -196,6 +156,40 @@ class RegistrationVC: UIViewController {
                 ])
         }
 
+    
+    @objc func dateChanged(_ sender: UIDatePicker) {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.locale = Locale(identifier: "ru_RU")
+        dateOfBirthTF.text = formatter.string(from: sender.date)
+    }
+
+    @objc func dismissPicker() {
+        view.endEditing(true)
+    }
+    
+    func setupLbl(text: String, color: UIColor) -> UILabel {
+        let lbl: UILabel = UILabel()
+        lbl.text = text
+        lbl.textColor = color
+        lbl.numberOfLines = 0
+        lbl.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        lbl.setContentHuggingPriority(.required, for: .horizontal)
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        return lbl
+    }
+    
+    func setupTFs(text: String, secure: Bool) -> UITextField {
+        let tf: UITextField = UITextField()
+        tf.placeholder = text
+        tf.borderStyle = .roundedRect
+        tf.isSecureTextEntry = secure
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        return tf
+    }
+    
+    
+    
 
 }
 
